@@ -4,8 +4,8 @@ import ultralytics
 ultralytics.checks()
 from ultralytics import YOLO
 
-SEG_MODEL_PATH = r"C:\Users\taral\OneDrive\Documents\Major project\Code\final\segmentation_model.pt"
-CLS_MODEL_PATH = r"C:\Users\taral\OneDrive\Documents\Major project\Code\final\classification_model.pt"
+SEG_MODEL_PATH = r"..\final\segmentation_model.pt"
+CLS_MODEL_PATH = r"..\final\classification_model.pt"
 
 seg_model = YOLO(SEG_MODEL_PATH)
 cls_model = YOLO(CLS_MODEL_PATH)

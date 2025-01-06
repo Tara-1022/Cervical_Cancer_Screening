@@ -33,37 +33,17 @@ def SR_remove(image):
 
 def apply_segment(image):
     results = seg_model.predict(image)
-    # try:
     for result in results:
-            # Get the height and width of the original image
             height, width = result.orig_img.shape[:2]
-
-            # Create the background
             background = np.ones((height, width, 3), dtype=np.uint8) * 255
-
-            # Get all predicted masks
             masks = result.masks.xy
-
-            # Get the original image
             orig_img = result.orig_img
-
             for mask in masks:
                     mask = mask.astype(int)
-
-                    # Create a mask image
                     mask_img = np.zeros_like(orig_img)
-
-                    # Fill the contour of the mask image in white
                     cv2.fillPoly(mask_img, [mask], (255, 255, 255))
-
-                    # Extract the object from the original image using the mask
                     masked_object = cv2.bitwise_and(orig_img, mask_img)
-
-                    # Copy the masked object to the background image
                     background[mask_img == 255] = masked_object[mask_img == 255]
-    # except:
-    #     print("ERROR:")
-    #     return
     cv2.imshow("Segmented", background)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
@@ -88,9 +68,6 @@ def predict(img):
 
 print(predict(
      cv2.imread(
-        #   r"C:\Users\taral\OneDrive\Documents\Major project\Data\Compiled_Split_All_20\val\HSIL-CIN3\AAJJ0.jpg"
-        # r"C:\Users\taral\OneDrive\Documents\Major project\Data\Compiled_All\HSIL-CIN3\AABP5.jpg"
-        # r"C:\Users\taral\OneDrive\Documents\Major project\Data\Compiled_All\Normal\AADQ04.jpg"
-        r"C:\Users\taral\OneDrive\Documents\Major project\Data\Compiled_All_ALL\AAHP1.jpg"
+        r"path_to_image.jpg"
      )
 ))
